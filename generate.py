@@ -52,7 +52,7 @@ def sample_text(sess, args_text, translation, style=None):
     fields = ['coordinates', 'sequence', 'bias', 'e', 'pi', 'mu1', 'mu2', 'std1', 'std2',
               'rho', 'window', 'kappa', 'phi', 'finish', 'zero_states']
     vs = namedtuple('Params', fields)(
-        *[tf.get_collection(name)[0] for name in fields]
+        *[tf.compat.v1.get_collection(name)[0] for name in fields]
     )
 
     text = np.array([translation.get(c, 0) for c in args_text])
@@ -126,11 +126,11 @@ def main():
     charset = [rev_translation[i] for i in range(len(rev_translation))]
     charset[0] = ''
 
-    config = tf.ConfigProto(
+    config = tf.compat.v1.ConfigProto(
         device_count={'GPU': 0}
     )
-    with tf.Session(config=config) as sess:
-        saver = tf.train.import_meta_graph(args.model_path + '.meta')
+    with tf.compat.v1.Session(config=config) as sess:
+        saver = tf.compat.v1.train.import_meta_graph(args.model_path + '.meta')
         saver.restore(sess, args.model_path)
 
         while True:
@@ -203,7 +203,8 @@ def main():
                     plt.plot(stroke[:, 0], -stroke[:, 1])
                 ax.set_title('Handwriting')
                 ax.set_aspect('equal')
-                plt.show()
+                fig.savefig('imgs/foo.png')   # save the figure to file
+                plt.close(fig)
 
             if args.animation:
                 fig, ax = plt.subplots(1, 1, frameon=False, figsize=(2 * (maxx - minx + 2) / (maxy - miny + 1), 2))
