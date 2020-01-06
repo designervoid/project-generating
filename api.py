@@ -29,4 +29,4 @@ def get_last():
 def get(filename):
     return send_file(f'imgs/{filename}', mimetype='image/gif')
 
-app.run(host='localhost', port='3000')
+app.run(host='213.226.126.121')
