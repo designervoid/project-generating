@@ -13,6 +13,7 @@ from collections import namedtuple
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', dest='model_path', type=str, default=os.path.join('pretrained', 'model-29'))
 parser.add_argument('--text', dest='text', type=str, default=None)
+parser.add_argument('--filename', dest='filename', type=str, default=None)
 parser.add_argument('--style', dest='style', type=int, default=None)
 parser.add_argument('--bias', dest='bias', type=float, default=1.)
 parser.add_argument('--force', dest='force', action='store_true', default=False)
@@ -151,7 +152,6 @@ def main():
                 style = [styles[0][args.style], styles[1][args.style]]
 
             phi_data, window_data, kappa_data, stroke_data, coords = sample_text(sess, args_text, translation, style)
-
             strokes = np.array(stroke_data)
             epsilon = 1e-8
             strokes[:, :2] = np.cumsum(strokes[:, :2], axis=0)
@@ -203,7 +203,7 @@ def main():
                     plt.plot(stroke[:, 0], -stroke[:, 1])
                 ax.set_title('Handwriting')
                 ax.set_aspect('equal')
-                fig.savefig('imgs/foo.png')   # save the figure to file
+                fig.savefig(f'imgs/{args.filename}.png')   # save the figure to file
                 plt.close(fig)
 
             if args.animation:
