@@ -151,7 +151,6 @@ def generate(model_path=os.path.join('pretrained', 'model-29'),
             minx, maxx = np.min(strokes[:, 0]), np.max(strokes[:, 0])
             miny, maxy = np.min(strokes[:, 1]), np.max(strokes[:, 1])
 
-
             fig, ax = plt.subplots(1, 1)
             for stroke in split_strokes(cumsum(np.array(coords))):
                 plt.plot(stroke[:, 0], -stroke[:, 1], color='black')
