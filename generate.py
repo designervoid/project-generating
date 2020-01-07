@@ -200,10 +200,10 @@ def main():
             else:
                 fig, ax = plt.subplots(1, 1)
                 for stroke in split_strokes(cumsum(np.array(coords))):
-                    plt.plot(stroke[:, 0], -stroke[:, 1])
-                ax.set_title('Handwriting')
+                    plt.plot(stroke[:, 0], -stroke[:, 1], color='black')
                 ax.set_aspect('equal')
-                fig.savefig(f'imgs/{args.filename}.png')   # save the figure to file
+                plt.axis('off')
+                fig.savefig(f'imgs/{args.filename}.png', transparent=True)   # save the figure to file
                 plt.close(fig)
 
             if args.animation:
