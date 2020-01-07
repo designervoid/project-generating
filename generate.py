@@ -108,7 +108,7 @@ def sample_text(sess, args_text, translation, style=None, bias=None, force=None)
     return phi_data, window_data, kappa_data, stroke_data, coords
 
 
-def main(model_path=os.path.join('pretrained', 'model-29'),
+def generate(model_path=os.path.join('pretrained', 'model-29'),
         text=None,
         filename=None,
         style=None,
@@ -164,4 +164,4 @@ def main(model_path=os.path.join('pretrained', 'model-29'),
             if text is not None:
                 break
 
-main(text='Test from func', filename='testing_func', style=1, bias=1., force=False)
+# generate(text='Test from func here!', filename='testing_func', style=7, bias=1., force=False)
